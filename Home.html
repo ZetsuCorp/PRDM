@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zetsu Battle Simulator</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+
+<body>
+
+
+    <!-- Battle Section: Enemy Image, Enemy Health, and Loading Bar -->
+    <div id="battle-section" style="display: flex; align-items: center; gap: 20px;">
+        <!-- Battle Image -->
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczPFFwdzL5gQwB81w4BPywqdQKsbvfpDvgXG8HkWtFhHALr8p8IFHjByYXxk4o2c6djbAXqnFxGjZbVKsx0xCet-b_UZ3Mrxs6wfKJ3c2SVsM6XN3Muyc34_A84KJ7G60clBSO2p1gzfrPo3JdoCRY5s=w720-h720-s-no-gm?authuser=0" alt="Battle Image" class="health-image">
+
+        <!-- Enemy Health Bar -->
+        <div class="health-container">
+            <h2>Enemy Health</h2>
+            <div class="health-bar" id="enemy-health-bar">
+                <div class="health-fill" id="enemy-health-fill"></div>
+            </div>
+            <div class="health-stats" id="enemy-health-stats">100/100 - HP</div> <!-- Health Stats -->
+        </div>
+
+        <!-- Loading Bar and Outcome Message Container -->
+        <div id="loading-container">
+            <div id="battle-message">In Battle</div>
+            <div id="loading-bar">
+                <div id="loading-fill">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczOEao7Vth7scJZkS5IhqHYJdc9YFUAjuC4VcFp1axLH2Z1FAGxmIXJtWsVbXkigzE7DsYOjkh0ova1wC5yRRupbGBJhFJNLLhBnz1qdISvmZ-v_p_ifZtVC1lPYpwQ5cTX4Ohye2sm32LoD8A8zP9Wb=w71-h71-s-no-gm?authuser=0" alt="Loading" class="loading-image">
+                </div>
+            </div>
+            <div id="outcome"></div>
+        </div>
+    </div>
+
+    <!-- Player Section: Icon, Health, and Buttons -->
+    <div class="player-section" style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+        <div class="player-health-section" style="display: flex; align-items: center; gap: 10px;">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczO7Wt7KQruTUYLzkI4LaObi9P-cHRz0suiHMmQt9mVOd9_wBrQ6dxMYtgbWabJlzWJW3eNT0kI4eiflF1XoS_hErkOv-ghNPejM8au_QtYihUTKnZpSpXwrRnYeklzBPyXzz14GT-3BZYhsbAhr3RPj=w992-h465-s-no-gm?authuser=0" alt="Player Icon" class="player-icon">
+
+            <!-- Player Health Bar -->
+            <div>
+                <h2>Zetsu-Team Health</h2>
+                <div class="health-bar" id="player-health-bar">
+                    <div class="health-fill" id="player-health-fill"></div>
+                </div>
+                <div class="health-stats" id="player-health-stats">100/100 - HP</div> <!-- Health Stats -->
+            </div>
+        </div>
+
+        <button id="decrease-health-button">Decrease Health</button>
+
+        <!-- Button Group -->
+        <div class="button-group" style="display: flex; gap: 10px; margin-top: 10px;">
+            <div id="heymint-button">
+                <script defer src="https://launchpad.heymint.xyz/embed.js" data-project-id="34217" data-chain="BSC"></script>
+            </div>
+            <div id="heymint-button-2">
+                <script defer src="https://launchpad.heymint.xyz/embed.js" data-project-id="34217" data-chain="BSC"></script>
+            </div>
+            <div id="heymint-button-3">
+                <script defer src="https://launchpad.heymint.xyz/embed.js" data-project-id="34217" data-chain="BSC"></script>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Overlay for Outcome Image -->
+    <div id="overlay" class="overlay" style="display: none;">
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjRnYjFiZjB5bmkzdzV0NHhwNW1vdXl4b2lyeG51YmQ3djljbjRkMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OIMzadpapYfc4vG5Uk/giphy.gif" id="outcome-image">
+    </div>
+<audio id="myAudio" autoplay loop >
+  <source src="https://aefd92791e.clvaw-cdnwnd.com/d10539437c0c9009ebf0318f1bb1b6c7/200000797-5ecbd5ecbf/AWTVSSong.mp3?ph=aefd92791e" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<button id="audioButton" onclick="toggleAudio()">🔊</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
