@@ -1,0 +1,398 @@
+.health-container {
+    color: white; /* Set font color to white */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5); /* Glow effect */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+    align-items: center; /* Center the items horizontally */
+}
+
+.player-health-container {
+    display: flex;
+    align-items: center;
+}
+
+.player-health-section {
+    color: white; /* White text */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 
+                 0 0 10px rgba(255, 255, 255, 0.6), 
+                 0 0 15px rgba(255, 255, 255, 0.4); /* Glowing effect */
+    font-size: 20px; /* Adjust size as needed */
+}
+
+.health-bar {
+    width: 100%;
+    max-width: 300px; /* Constrain width for larger screens */
+    height: 14px;
+    background: linear-gradient(145deg, #333, #666); /* Dark gradient for the bar background */
+    border: 2px solid #444; /* Darker border for sturdiness */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    position: relative; /* So inner glow doesn't overflow */
+}
+
+.health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #5aff15, #00b712); /* Green gradient for health */
+    width: 100%; /* Initial width, update this via JS */
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px 2px rgba(90, 255, 21, 0.6); /* Green glow */
+}
+
+/* Glow effect for full health */
+.health-bar.full-health .health-fill {
+    box-shadow: 0 0 15px 3px rgba(0, 255, 0, 0.8); /* Stronger glow for full health */
+}
+
+
+#decrease-health-button {
+    display: none;
+}
+
+#loading-bar {
+    width: 300px;
+    height: 10px;
+    background-color: #b22222;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(222,0, 0, 0.5);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 0, 0, 9.5);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+}
+
+#loading-bar {
+    position: relative;
+    height: 20px; /* Adjust height as needed */
+    background-color: #e0e0e0; /* Background for the loading bar */
+}
+
+#loading-fill {
+    height: 100%;
+    width: 100%;
+    background-color:  #000000;
+    position: absolute;
+    transition: width 1s linear;
+    animation: heartbeat 1s infinite;
+   box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Change to red shadow */
+
+}
+
+.loading-image {
+    position: absolute;
+    height: 100%; /* Adjust size */
+    width: auto;  /* Maintain aspect ratio */
+    left: 0;      /* Start at the left */
+    animation: float 1s linear infinite; /* Floating animation */
+}
+
+@keyframes float {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: calc(100% - 50px); /* Adjust to the width of your loading image */
+    }
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(91, 192, 222, 0.5);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(91, 192, 222, 1);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(91, 192, 222, 0.5);
+    }
+}
+
+/* Robust and solid style for the outcome message */
+#outcome {
+    font-size: 26px;
+    font-weight: 800;
+    color: #f5f5f5; /* Light metallic gray */
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px 20px;
+    border: 4px solid #b22222; /* Thick red border for a solid frame */
+    border-radius: 12px;
+    background: linear-gradient(145deg, #333, #444); /* Dark metallic background */
+    box-shadow: 
+        inset 0 0 8px #111, /* Inner shadow for depth */
+        0 0 15px rgba(255, 71, 71, 0.7), /* Outer red glow */
+        0 4px 15px rgba(0, 0, 0, 0.7); /* Base shadow for weight */
+    animation: outcome-glow 2s infinite alternate; /* Glow and pulse animation */
+}
+
+/* Subtle glow and pulse animation for outcome */
+@keyframes outcome-glow {
+    from {
+        box-shadow: 
+            inset 0 0 8px #111,
+            0 0 20px rgba(255, 71, 71, 0.8), /* Stronger outer glow */
+            0 6px 20px rgba(0, 0, 0, 0.8); /* Deeper shadow for weight */
+        transform: scale(1.02); /* Slight scale effect */
+    }
+    to {
+        box-shadow: 
+            inset 0 0 8px #111,
+            0 0 10px rgba(255, 71, 71, 0.5), /* Softer outer glow */
+            0 4px 15px rgba(0, 0, 0, 0.7); /* Reduced shadow */
+        transform: scale(1); /* Reset scale */
+    }
+}
+
+/* Active class to display the outcome message */
+#outcome.active {
+    display: block; /* Show only when active */
+}
+
+
+/* Enemy Health Bar Styling */
+.health-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.health-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.health-fill {
+  height: 100%;
+  width: 100%;
+  background-color: green;
+}
+
+/* Battle Section Styling */
+#battle-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  
+}
+
+/* Health Image with Red Glow Outline */
+.health-image {
+  width: 190px;
+  height: auto;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); /* Red glow effect */
+  transition: box-shadow 0.3s ease;
+}
+
+/* Optional hover effect for a more intense glow */
+.health-image:hover {
+  box-shadow: 0 0 25px rgba(255, 0, 0, 1);
+}
+
+/* Optional hover effect for a more intense glow */
+#battle-image-container:hover {
+  box-shadow: 0 0 25px rgba(255, 0, 0, 1);
+}
+
+/* Initial hidden state */
+#battle-message {
+    display: none; /* Hide by default */
+    font-size: 26px;
+    font-weight: 800;
+    color: #e5e5e5; /* Light gray text for a metallic look */
+    text-align: center;
+    padding: 15px 20px;
+    border: 4px solid #b22222; /* Thicker, deep red border */
+    border-radius: 12px;
+    background: linear-gradient(145deg, #333, #444); /* Dark metallic gradient */
+    box-shadow: 
+        inset 0 0 8px #111, /* Inner shadow for depth */
+        0 0 15px rgba(255, 71, 71, 0.7), /* Outer glow */
+        0 4px 15px rgba(0, 0, 0, 0.7); /* Base shadow for weight */
+    animation: solid-glow 2s infinite alternate; /* Slower glow */
+}
+
+/* Subtle glow and pulse animation */
+@keyframes solid-glow {
+    from {
+        box-shadow: 
+            inset 0 0 8px #111, 
+            0 0 20px rgba(255, 71, 71, 0.8), /* Stronger glow in initial state */
+            0 6px 20px rgba(0, 0, 0, 0.8); /* Slightly larger shadow */
+        transform: scale(1.02); /* Slight scale effect */
+    }
+    to {
+        box-shadow: 
+            inset 0 0 8px #111,
+            0 0 10px rgba(255, 71, 71, 0.5), /* Softer glow */
+            0 4px 15px rgba(0, 0, 0, 0.7); /* Reduced shadow */
+        transform: scale(1); /* Reset scale */
+    }
+}
+
+/* Active class to display the message */
+#battle-message.active {
+    display: flex; /* Show only when active */
+    justify-content: center;
+    align-items: center;
+}
+/* Centering container for player icon */
+.player-icon-container {
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center;     /* Vertical centering, if needed */
+  height: 100vh;           /* Full viewport height, optional */
+}
+
+/* Player Icon in a Box with Fuchsia Glow Outline */
+.player-icon {
+  width: 370px;
+  height: auto;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.8); /* Fuchsia glow effect */
+  transition: box-shadow 0.3s ease;
+}
+
+/* Optional hover effect for a more intense fuchsia glow */
+.player-icon:hover {
+  box-shadow: 0 0 25px rgba(255, 0, 255, 1);
+}
+ body {
+            background-image: url('https://lh3.googleusercontent.com/pw/AP1GczM1acceMEDbxNlvCetU8gRbImr4NvPxMSfnJuZKEJHXtYIZQjeS9c-E8EVEN-auJMOPlCQQ0syySAgDlmQpTEm0-AOw37OBpxTN5D3aKPLhIwWki6ZkL8IXBCk9QK-B-ydxfKpVJR-n_q8dbHG8tSYu=w1562-h878-s-no-gm?authuser=0'); /* Replace with your background image URL */
+            background-size: cover;
+            background-position: center;
+           
+        }
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* ensure it appears on top of other elements */
+}
+
+#outcome-image {
+    max-width: 80%; /* adjust size as needed */
+    max-height: 80%; /* adjust size as needed */
+}
+/* Reset Button */
+#reset-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ff4d4d, #ff1a1a, #8a2be2, #00f9ff); /* Holographic gradient */
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000; /* Ensures it stays on top */
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.7), 
+                0 0 20px rgba(138, 43, 226, 0.5), 
+                0 0 30px rgba(0, 249, 255, 0.7); /* Multicolor glow */
+}
+
+/* Hover Effect */
+#reset-button:hover {
+    background: linear-gradient(135deg, #ff4d4d, #ff1a1a, #8a2be2, #00f9ff, #39ff14); /* Smooth holographic gradient */
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.9),
+                0 0 25px rgba(138, 43, 226, 0.7), 
+                0 0 40px rgba(0, 249, 255, 0.9),
+                0 0 60px rgba(57, 255, 20, 0.7); /* Enhanced glow on hover */
+    transform: scale(1.05); /* Slight enlargement on hover */
+}
+
+/* Holographic Text Effect */
+#reset-button::before {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff4d4d, #8a2be2, #00f9ff, #ff1a1a);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: holographic-text 4s ease-in-out infinite;
+}
+
+/* Background color animation */
+@keyframes holographic-text {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Move the button to the top-left corner and style it */
+#audioButton {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  padding: 12px 20px;
+  cursor: pointer;
+  color: #00ffc6; /* Holographic text color */
+  background: transparent;
+  border: 2px solid rgba(0, 255, 198, 0.8); /* Holographic border color */
+  border-radius: 8px;
+  text-shadow: 0 0 8px rgba(0, 255, 198, 0.8), 0 0 16px rgba(0, 255, 198, 0.6); /* Glow effect */
+  box-shadow: 0 0 10px rgba(0, 255, 198, 0.5), 0 0 20px rgba(0, 255, 198, 0.4); /* Outer glow */
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+/* Hover effect */
+#audioButton:hover {
+  color: #00b8a1;
+  border-color: rgba(0, 184, 161, 1); /* Darker border on hover */
+  box-shadow: 0 0 15px rgba(0, 255, 198, 0.7), 0 0 30px rgba(0, 184, 161, 0.6); /* Enhanced glow */
+  transform: scale(1.1); /* Slight scale-up effect */
+}
+
+/* Active effect when the button is pressed */
+#audioButton:active {
+  transform: scale(0.95); /* Slightly smaller when pressed */
+  box-shadow: 0 0 8px rgba(0, 184, 161, 0.5), 0 0 16px rgba(0, 184, 161, 0.3); /* Reduced glow */
+}
+
+
+/*kdsjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+
+
